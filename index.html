@@ -76,7 +76,7 @@
                     <ul class="tags"><li>Python</li><li>PostgreSQL</li><li>SQL</li><li>Power BI</li></ul>
                     <div class="project-buttons">
                         <a href="https://github.com/hoangvanhieu2004/VietDist-Analytics-Project" target="_blank" rel="noopener" class="btn" data-i18n="btn.github">View on GitHub</a>
-                        <a href="https://github.com/hoangvanhieu2004/VietDist-Analytics-Project/blob/main/03_power_bi/Vietdist%20dashboard.pdf" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="btn.live">Live Dashboard</a>
+                        <button type="button" class="btn btn-secondary" data-gallery="vietdist" data-i18n="btn.view">View Dashboard</button>
                     </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                     <ul class="tags"><li>Python</li><li>Power BI</li><li>DAX</li><li>Star Schema</li></ul>
                     <div class="project-buttons">
                         <a href="https://github.com/hoangvanhieu2004/Superstore-Market-Expansion-Product-Strategy-Analysis-Power-BI-Dashboard" target="_blank" rel="noopener" class="btn" data-i18n="btn.github">View on GitHub</a>
-                        <a href="https://github.com/hoangvanhieu2004/Superstore-Market-Expansion-Product-Strategy-Analysis-Power-BI-Dashboard/blob/main/Dashboard/Global_Superstore_Dashboard.pdf" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="btn.live">Live Dashboard</a>
+                        <button type="button" class="btn btn-secondary" data-gallery="superstore" data-i18n="btn.view">View Dashboard</button>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                     <ul class="tags"><li>Power BI</li><li>DAX</li><li>Power Query</li></ul>
                     <div class="project-buttons">
                         <a href="https://github.com/hoangvanhieu2004/momo-topup-performance-analysis-2020-Power-BI" target="_blank" rel="noopener" class="btn" data-i18n="btn.github">View on GitHub</a>
-                        <a href="https://github.com/hoangvanhieu2004/momo-topup-performance-analysis-2020-Power-BI/blob/main/power_bi/Momo_finance_dashboard.pdf" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="btn.live">Live Dashboard</a>
+                        <button type="button" class="btn btn-secondary" data-gallery="momo" data-i18n="btn.view">View Dashboard</button>
                     </div>
                 </div>
             </div>
@@ -240,6 +240,25 @@
         <p>&copy; 2026 Hoàng Văn Hiếu. <span data-i18n="footer.rights">All rights reserved.</span></p>
     </div>
 </footer>
+
+<!-- DASHBOARD VIEWER -->
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-labelledby="viewer-title">
+    <div class="viewer-box">
+        <div class="viewer-head">
+            <div>
+                <h3 id="viewer-title"></h3>
+                <p id="viewer-caption"></p>
+            </div>
+            <button type="button" class="viewer-close" aria-label="Close"><i class="fas fa-xmark"></i></button>
+        </div>
+        <div class="viewer-body">
+            <button type="button" class="viewer-nav viewer-prev" aria-label="Previous page"><i class="fas fa-chevron-left"></i></button>
+            <a id="viewer-link" href="#" target="_blank" rel="noopener"><img id="viewer-img" src="" alt=""></a>
+            <button type="button" class="viewer-nav viewer-next" aria-label="Next page"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="viewer-dots" id="viewer-dots"></div>
+    </div>
+</div>
 
 <script src="assets/js/main.js"></script>
 </body>

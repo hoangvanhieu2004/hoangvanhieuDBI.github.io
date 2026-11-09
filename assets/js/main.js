@@ -23,6 +23,7 @@ const VI = {
     'p.ewallet': 'Đánh giá chất lượng dữ liệu và trả lời các câu hỏi kinh doanh trên khoảng 1,3 triệu giao dịch ví điện tử bằng pandas: sản phẩm có doanh số cao nhất, kiểm tra team sở hữu, nguồn hoàn tiền và phân loại giao dịch.',
     'btn.github': 'Xem trên GitHub',
     'btn.live': 'Xem Dashboard',
+    'btn.view': 'Xem Dashboard',
 
     'skills.title': 'Kỹ năng chuyên môn',
     'skills.c1': 'Phân tích & Trực quan hóa',
@@ -63,7 +64,10 @@ document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     EN[el.dataset.i18nPlaceholder] = el.placeholder;
 });
 
+let currentLang = 'en';
+
 function setLanguage(lang) {
+    currentLang = lang;
     const dict = lang === 'vi' ? VI : EN;
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const text = dict[el.dataset.i18n];
@@ -78,6 +82,7 @@ function setLanguage(lang) {
     document.querySelectorAll('.lang-switch button').forEach(btn => {
         btn.setAttribute('aria-pressed', btn.dataset.lang === lang ? 'true' : 'false');
     });
+    if (typeof refreshViewer === 'function') refreshViewer();
     try { localStorage.setItem('lang', lang); } catch (e) { /* storage unavailable */ }
 }
 
@@ -99,4 +104,115 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             target.scrollIntoView({ behavior: 'smooth' });
         }
     });
+});
+
+// ---------- Dashboard viewer (page-by-page screenshots) ----------
+const GALLERIES = {
+    vietdist: {
+        title: 'VietDist Analytics',
+        pages: [
+            ['KPI Overview', 'Tổng quan KPI'],
+            ['Target Versions', 'Kế hoạch theo phiên bản'],
+            ['Customers & Products', 'Khách hàng & Sản phẩm'],
+            ['Sales Rep Journey', 'Hành trình nhân viên'],
+            ['Distribution Channels', 'Kênh phân phối'],
+            ['Distributor Performance', 'Hiệu suất nhà phân phối'],
+            ['Promotions', 'Khuyến mãi']
+        ]
+    },
+    superstore: {
+        title: 'Superstore Market Expansion',
+        pages: [
+            ['Overview', 'Tổng quan'],
+            ['Markets', 'Thị trường'],
+            ['Products', 'Sản phẩm'],
+            ['Recommendations & Insights', 'Đề xuất & Insight']
+        ]
+    },
+    momo: {
+        title: 'MoMo Topup Performance 2020',
+        pages: [
+            ['Overview', 'Tổng quan'],
+            ['Carriers', 'Nhà mạng'],
+            ['User Groups', 'Nhóm người dùng'],
+            ['Recommendations & Insights', 'Đề xuất & Insight']
+        ]
+    }
+};
+
+const viewer = document.getElementById('viewer');
+const viewerImg = document.getElementById('viewer-img');
+const viewerLink = document.getElementById('viewer-link');
+const viewerTitle = document.getElementById('viewer-title');
+const viewerCaption = document.getElementById('viewer-caption');
+const viewerDots = document.getElementById('viewer-dots');
+let gKey = null, gIndex = 0, lastFocus = null;
+
+function refreshViewer() {
+    if (!gKey) return;
+    const g = GALLERIES[gKey];
+    const n = g.pages.length;
+    const name = g.pages[gIndex][currentLang === 'vi' ? 1 : 0];
+    const src = `assets/images/dashboards/${gKey}/page-${gIndex + 1}.jpg`;
+    viewerTitle.textContent = g.title;
+    viewerCaption.textContent = (currentLang === 'vi' ? 'Trang ' : 'Page ') + `${gIndex + 1}/${n}: ${name}`;
+    viewerImg.src = src;
+    viewerImg.alt = `${g.title} - ${name}`;
+    viewerLink.href = src;
+    viewerLink.title = currentLang === 'vi' ? 'Mở ảnh kích thước đầy đủ' : 'Open full-size image';
+    viewerDots.innerHTML = '';
+    g.pages.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = i === gIndex ? 'active' : '';
+        dot.setAttribute('aria-label', `${i + 1}`);
+        dot.addEventListener('click', () => { gIndex = i; refreshViewer(); });
+        viewerDots.appendChild(dot);
+    });
+    // Preload the next page for snappy navigation.
+    new Image().src = `assets/images/dashboards/${gKey}/page-${(gIndex + 1) % n + 1}.jpg`;
+}
+
+function openViewer(key) {
+    gKey = key; gIndex = 0; lastFocus = document.activeElement;
+    refreshViewer();
+    viewer.hidden = false;
+    document.body.style.overflow = 'hidden';
+    viewer.querySelector('.viewer-close').focus();
+}
+
+function closeViewer() {
+    viewer.hidden = true;
+    gKey = null;
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+}
+
+function step(delta) {
+    const n = GALLERIES[gKey].pages.length;
+    gIndex = (gIndex + delta + n) % n;
+    refreshViewer();
+}
+
+document.querySelectorAll('[data-gallery]').forEach(btn => {
+    btn.addEventListener('click', () => openViewer(btn.dataset.gallery));
+});
+viewer.querySelector('.viewer-close').addEventListener('click', closeViewer);
+viewer.querySelector('.viewer-prev').addEventListener('click', () => step(-1));
+viewer.querySelector('.viewer-next').addEventListener('click', () => step(1));
+viewer.addEventListener('click', e => { if (e.target === viewer) closeViewer(); });
+document.addEventListener('keydown', e => {
+    if (viewer.hidden) return;
+    if (e.key === 'Escape') closeViewer();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+});
+// Swipe on phones
+let touchX = null;
+viewerImg.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+viewerImg.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+    touchX = null;
 });
