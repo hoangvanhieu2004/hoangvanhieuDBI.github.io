@@ -2,14 +2,14 @@
 // English text lives in index.html; this holds the Vietnamese version.
 // To edit a translation, change the text next to its key.
 const VI = {
-    'header.subtitle': 'Định hướng Data Analyst | SQL · Power BI · Python',
+    'header.subtitle': 'Data Analyst | SQL · Power BI · Python',
     'nav.about': 'Giới thiệu',
     'nav.projects': 'Dự án',
     'nav.skills': 'Kỹ năng',
     'nav.contact': 'Liên hệ',
 
     'about.title': 'Giới thiệu',
-    'about.p1': 'Tôi là sinh viên mới tốt nghiệp, định hướng trở thành Data Analyst. Tôi thích biến những dữ liệu thực tế còn lộn xộn thành câu chuyện rõ ràng và những insight có thể hành động được.',
+    'about.p1': 'Tôi là Data Analyst mới tốt nghiệp. Tôi thích biến những dữ liệu thực tế còn lộn xộn thành câu chuyện rõ ràng và những insight có thể hành động được.',
     'about.p2': 'Qua các dự án thực hành, tôi đã làm trọn quy trình phân tích: làm sạch và mô hình hóa dữ liệu bằng SQL và Python, xây dựng dashboard Power BI xoay quanh các câu hỏi kinh doanh, và xác định những KPI thực sự quan trọng. Các dự án của tôi trải dài từ phân tích thương mại điện tử, fintech cho đến một pipeline dữ liệu FMCG end-to-end.',
     'about.p3': 'Tôi rất thích khoảnh khắc "à há!" khi dữ liệu hé lộ điều gì đó mới mẻ và hữu ích, và tôi đang tìm kiếm vị trí Data Analyst đầu tiên để tiếp tục học hỏi và tạo ra giá trị thực tế.',
 
