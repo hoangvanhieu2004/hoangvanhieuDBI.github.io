@@ -595,3 +595,25 @@ footer p {
         font-size: 3.2rem;
     }
 }
+
+/* --- 12. Contact form success note --- */
+.form-success {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #e8f7ee;
+    color: #1e6b3a;
+    border: 1px solid #b7e2c6;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.form-success[hidden] {
+    display: none;
+}
+
+.form-success i {
+    font-size: 1.3rem;
+}

@@ -45,6 +45,7 @@ const VI = {
     'contact.message': 'Nội dung',
     'contact.messagePh': 'Nội dung tin nhắn',
     'contact.send': 'Gửi tin nhắn',
+    'contact.success': 'Cảm ơn bạn! Tin nhắn đã được gửi. Tôi sẽ phản hồi sớm nhất có thể.',
 
     'footer.rights': 'Bảo lưu mọi quyền.'
 };
@@ -89,6 +90,14 @@ document.querySelectorAll('.lang-switch button').forEach(btn => {
 let savedLang = 'en';
 try { savedLang = localStorage.getItem('lang') || 'en'; } catch (e) { /* ignore */ }
 if (savedLang === 'vi') setLanguage('vi');
+
+// ---------- Show a thank-you note after the contact form redirects back ----------
+if (new URLSearchParams(window.location.search).get('sent') === '1') {
+    const note = document.getElementById('form-success');
+    if (note) note.hidden = false;
+    // Clean the address bar so a refresh doesn't show the note again.
+    history.replaceState(null, '', window.location.pathname + '#contact');
+}
 
 // ---------- Smooth scrolling for nav links ----------
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
