@@ -547,18 +547,6 @@ footer p {
     object-position: top;
 }
 
-.project-thumb {
-    height: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4.5rem;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.thumb-ml  { background: linear-gradient(135deg, #3D5A80, #29B6F6); }
-.thumb-sql { background: linear-gradient(135deg, #1A2A4C, #4285F4); }
-.thumb-py  { background: linear-gradient(135deg, #2E5E4E, #4ECDC4); }
 
 .project-card-content h3 {
     font-size: 1.6rem;
