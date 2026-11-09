@@ -596,24 +596,48 @@ footer p {
     }
 }
 
-/* --- 12. Contact form success note --- */
-.form-success {
+/* --- 12. Thank-you page --- */
+.thanks-page {
+    min-height: 100vh;
     display: flex;
     align-items: center;
-    gap: 12px;
-    background: #e8f7ee;
-    color: #1e6b3a;
-    border: 1px solid #b7e2c6;
-    border-radius: 6px;
-    padding: 14px 18px;
-    margin-bottom: 25px;
-    font-weight: 700;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
 }
 
-.form-success[hidden] {
-    display: none;
+.thanks-card {
+    background: var(--white-color);
+    max-width: 520px;
+    width: 100%;
+    padding: 50px 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
-.form-success i {
-    font-size: 1.3rem;
+.thanks-icon {
+    font-size: 4rem;
+    color: #2eaa5c;
+    margin-bottom: 10px;
+}
+
+.thanks-card h1 {
+    font-family: var(--font-heading);
+    font-size: 2.6rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.thanks-card p {
+    color: var(--light-text-color);
+    font-size: 1.1rem;
+    margin-bottom: 35px;
+}
+
+.thanks-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 30px;
 }
