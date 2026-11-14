@@ -78,6 +78,11 @@ function setLanguage(lang) {
         if (text !== undefined) el.placeholder = text;
     });
     document.documentElement.lang = lang;
+    const cv = document.getElementById('cv-link');
+    if (cv) {
+        cv.href = lang === 'vi' ? 'assets/CV_VI.pdf' : 'assets/CV.pdf';
+        cv.title = lang === 'vi' ? 'Tải CV (tiếng Việt)' : 'Download CV (English)';
+    }
     document.title = TITLES[lang];
     document.querySelectorAll('.lang-switch button').forEach(btn => {
         btn.setAttribute('aria-pressed', btn.dataset.lang === lang ? 'true' : 'false');
