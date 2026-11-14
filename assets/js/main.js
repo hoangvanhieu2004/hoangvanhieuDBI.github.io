@@ -80,7 +80,7 @@ function setLanguage(lang) {
     document.documentElement.lang = lang;
     const cv = document.getElementById('cv-link');
     if (cv) {
-        cv.href = lang === 'vi' ? 'assets/CV_VI.pdf?v=2' : 'assets/CV.pdf?v=2';
+        cv.href = lang === 'vi' ? 'assets/CV_VI.pdf?v=3' : 'assets/CV.pdf?v=3';
         cv.title = lang === 'vi' ? 'Tải CV (tiếng Việt)' : 'Download CV (English)';
     }
     document.title = TITLES[lang];
