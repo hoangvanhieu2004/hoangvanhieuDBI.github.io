@@ -90,15 +90,12 @@ document.querySelectorAll('.lang-switch button').forEach(btn => {
     btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
 });
 
-// Start in the language the visitor picked last time (default: English).
-let savedLang = 'en';
-try { savedLang = localStorage.getItem('lang') || 'en'; } catch (e) { /* ignore */ }
-if (savedLang === 'vi') setLanguage('vi');
-
 // ---------- Smooth scrolling for nav links ----------
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        const target = document.querySelector(this.getAttribute('href'));
+        const href = this.getAttribute('href');
+        if (!href || !href.startsWith('#') || href.length < 2) return;
+        const target = document.querySelector(href);
         if (target) {
             e.preventDefault();
             target.scrollIntoView({ behavior: 'smooth' });
@@ -215,3 +212,12 @@ viewerImg.addEventListener('touchend', e => {
     if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
     touchX = null;
 });
+
+// ---------- Restore saved language ----------
+// Must run LAST: setLanguage() calls refreshViewer(), which reads gKey and the
+// viewer elements declared above. Running it earlier throws
+// "Cannot access 'gKey' before initialization" and stops the whole script,
+// so the "View Dashboard" buttons never get their click handlers.
+let savedLang = 'en';
+try { savedLang = localStorage.getItem('lang') || 'en'; } catch (e) { /* ignore */ }
+if (savedLang === 'vi') setLanguage('vi');
