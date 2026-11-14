@@ -14,7 +14,7 @@ const VI = {
     'about.p3': 'Tôi rất thích khoảnh khắc "à há!" khi dữ liệu hé lộ điều gì đó mới mẻ và hữu ích, và tôi đang tìm kiếm vị trí Data Analyst đầu tiên để tiếp tục học hỏi và tạo ra giá trị thực tế.',
 
     'projects.title': 'Dự án của tôi',
-    'p.vietdist': 'Pipeline dữ liệu bán hàng FMCG end-to-end: Python nạp 10 file Excel/CSV rời rạc vào PostgreSQL theo kiến trúc Medallion (Bronze → Silver → Gold), xử lý chỉ tiêu nhiều phiên bản và lịch sử SCD Type 2, rồi phục vụ dashboard Power BI 7 trang cho phòng Kinh doanh và Phân phối.',
+    'p.vietdist': 'Pipeline dữ liệu bán hàng FMCG end-to-end: Python nạp 10 file Excel/CSV từ Google Drive vào PostgreSQL theo kiến trúc Medallion (Bronze → Silver → Gold), có chỉ tiêu nhiều phiên bản, lịch sử SCD Type 2 và data quality test bằng SQL, rồi phục vụ semantic model Power BI dùng chung với 6 trang báo cáo và Row-Level Security.',
     'p.superstore': 'Phân tích 51 nghìn dòng đơn hàng ở 147 quốc gia để đề xuất thị trường và sản phẩm nên ưu tiên. EU đóng góp tăng trưởng nhiều nhất với biên lợi nhuận 12,4%, trong khi EMEA tăng nhanh nhưng biên chỉ 7,5%. Dashboard Power BI 4 trang trên mô hình star schema.',
     'p.momo': 'Làm sao để dịch vụ nạp tiền điện thoại của MoMo tăng trưởng mà vẫn có lãi khi đối thủ cashback ngày càng sâu? Làm sạch 13,5 nghìn giao dịch và dựng dashboard Power BI quanh hai chỉ số North Star (lợi nhuận và doanh thu hằng tháng), chia theo nhà mạng và nhóm người dùng.',
     'p.fbads': 'Dùng Claude Code biến các file báo cáo Facebook Ads hằng ngày của một shop hoa thành dashboard HTML tương tác, cho biết mỗi ngày nên dồn hay cắt ngân sách ở đâu, xoay quanh chỉ số chi phí mỗi tin nhắn trên 17 chiến dịch và 103 nhóm quảng cáo.',
@@ -109,15 +109,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ---------- Dashboard viewer (page-by-page screenshots) ----------
 const GALLERIES = {
     vietdist: {
-        title: 'VietDist Analytics',
+        title: 'VietDist Sales Performance & Distribution Analytics',
         pages: [
-            ['KPI Overview', 'Tổng quan KPI'],
-            ['Target Versions', 'Kế hoạch theo phiên bản'],
+            ['Sales Overview', 'Tổng quan kinh doanh'],
+            ['Sales Targets', 'Chỉ tiêu'],
             ['Customers & Products', 'Khách hàng & Sản phẩm'],
-            ['Sales Rep Journey', 'Hành trình nhân viên'],
-            ['Distribution Channels', 'Kênh phân phối'],
-            ['Distributor Performance', 'Hiệu suất nhà phân phối'],
-            ['Promotions', 'Khuyến mãi']
+            ['Sales Reps', 'Nhân viên'],
+            ['Distribution Overview', 'Tổng quan phân phối'],
+            ['Distributor Performance', 'Hiệu suất phân phối']
         ]
     },
     superstore: {
